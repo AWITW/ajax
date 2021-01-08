@@ -1,0 +1,29 @@
+//1、 引入express
+const express = require("express");
+//2、创建应用对象
+const app = express();
+//3、创建路由规则
+//request是对请求报文的封装
+//response是对响应报文的封装
+app.all("/serve", function (request, response) {
+  response.setHeader("Access-Control-Allow-Origin", "*");
+  response.setHeader("Access-Control-Allow-Header", "*");
+  const data = {
+    name: "lianrui",
+  };
+  response.send(JSON.stringify(data));
+});
+app.all("/delay", function (request, response) {
+  response.setHeader("Access-Control-Allow-Origin", "*");
+  response.setHeader("Access-Control-Allow-Header", "*");
+  const data = {
+    name: "lianrui",
+  };
+  setTimeout(function () {
+    response.send(JSON.stringify(data));
+  }, 3000);
+});
+// 4、监听端口启动服务
+app.listen(8000, () => {
+  console.log("服务已启动，8000端口正在监听。。。");
+});

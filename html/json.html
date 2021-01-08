@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+    <style>
+      div {
+        width: 200px;
+        height: 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <div></div>
+    <script>
+      const div = document.querySelector("div");
+      window.addEventListener("keydown", function () {
+        // 1.创建对象
+        let xhr = new XMLHttpRequest();
+        // 设置响应体类型
+        xhr.responseType = "json"; // 2.初始化r
+        xhr.open("GET", "http://127.0.0.1:8000/json-serve");
+        // 3.发送
+        xhr.send();
+        // 4.处理响应结果
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4) {
+            if (xhr.status >= 200 && xhr.status < 300) {
+              div.innerHTML = xhr.response.name;
+            }
+          }
+        };
+      });
+    </script>
+  </body>
+</html>
